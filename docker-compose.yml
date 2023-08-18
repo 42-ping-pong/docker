@@ -1,0 +1,53 @@
+version: "3.1"
+
+services:
+  db:
+    env_file:
+      - ./.env
+    build:
+      context: ./database
+      dockerfile: ./dockerfile
+    container_name: postgres
+    hostname: postgres
+    volumes:
+      - vol_database:/var/lib/postgresql/data/pgdata
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - intra
+  back:
+    env_file:
+      - ./.env
+    build:
+      context: ./back
+      dockerfile: ./Dockerfile
+    container_name: back
+    restart: always
+    ports:
+      - "4000:4000"
+    networks:
+      - intra
+  front:
+    env_file:
+      - ./.env
+    build:
+      context: ./front
+      dockerfile: ./Dockerfile
+    container_name: front
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - intra
+
+volumes:
+  vol_database:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/hyna/data
+networks:
+  intra:
+    driver: bridge
