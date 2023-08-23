@@ -47,7 +47,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /User/hyna/data
+      device: /Users/nahyeon/data
 networks:
   intra:
     driver: bridge
