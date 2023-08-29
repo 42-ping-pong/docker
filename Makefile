@@ -11,7 +11,7 @@ fclean :
 	docker-compose $(FILE) down -v
 
 cache :
-	@${MAKE} clean
+	@${MAKE} fclean
 	docker system prune -a
 	rm -rf ~/data
 
@@ -19,7 +19,10 @@ cache :
 clone : 
 	git clone git@github.com:42-ping-pong/ping_pong_front.git front/app 2> /dev/null || true
 	git clone git@github.com:42-ping-pong/ping_pong_back.git  back/app 2> /dev/null || true
+	cd front/app && git checkout release
+	cd back/app  && git checkout develop
+
 
 re :
-	@${MAKE} fclean
+	@${MAKE} cache
 	@${MAKE} all

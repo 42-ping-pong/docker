@@ -12,8 +12,8 @@ services:
     volumes:
       - vol_database:/var/lib/postgresql/data/pgdata
     restart: always
-    expose:
-      - "5432"
+    ports:
+      - 5432:5432
     networks:
       - intra
   back:
@@ -23,11 +23,14 @@ services:
       context: ./back
       dockerfile: ./Dockerfile
     container_name: back
+    hostname: back
     restart: always
-    expose:
-      - "4000"
+    ports:
+      - "4000:4000"
     networks:
       - intra
+    depends_on:
+      - db
   front:
     env_file:
       - ./.env
@@ -40,6 +43,8 @@ services:
       - "3000:3000"
     networks:
       - intra
+    depends_on:
+      - back
 
 volumes:
   vol_database:
@@ -47,7 +52,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /Users/nahyeon/data
+      device: /Users/hyna/data
 networks:
   intra:
     driver: bridge
