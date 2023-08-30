@@ -22,6 +22,10 @@ clone :
 	cd front/app && git checkout release
 	cd back/app  && git checkout develop
 
+pull : 
+	cd front/app && git pull origin release
+	cd back/app && git checkout develop && git pull origin develop && git checkout release && git merge develop
+
 
 re :
 	@${MAKE} cache

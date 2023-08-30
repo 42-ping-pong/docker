@@ -1,7 +1,7 @@
 FROM node:latest
 
-COPY .env ./
-RUN export $(cat .env | xargs) && rm -rf .env
+# COPY .env ./
+# RUN export $(cat .env | xargs) && rm -rf .env
 
 RUN mkdir -p /var
 

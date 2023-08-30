@@ -1,7 +1,7 @@
 FROM postgres
 
-COPY .env ./
-RUN export $(cat .env | xargs) && rm -rf .env
+# COPY .env ./
+# RUN export $(cat .env | xargs) && rm -rf .env
 
 COPY ./conf/init_database.sh /docker-entrypoint-initdb.d/init-db.sh
 
