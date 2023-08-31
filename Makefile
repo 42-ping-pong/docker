@@ -2,7 +2,7 @@ FILE = -f ./docker-compose.yml
 
 all :
 	mkdir -p ~/data
-	docker-compose $(FILE) up --build -d
+	docker-compose $(FILE) up --build
 
 clean :
 	docker-compose $(FILE) down
